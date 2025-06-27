@@ -100,7 +100,8 @@ flowchart LR
   BI --> Dash[Dashboard UI]
 ```
 
-\---------------------|------------------------------|------------------------------------------------------|
+---------------------|\---------------------|------------------------------|------------------------------------------------------|
+
 \| Data Storage        | MS SQL Server                | Source of transactional sales, product, customer data |
 \| BI & Visualization  | Power BI Desktop/Service     | Dashboard creation and publishing                    |
 \| Data Modeling & DAX | Power BI Data Model, DAX     | Measures, calculated columns                         |
