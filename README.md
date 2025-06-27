@@ -1,14 +1,13 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/your-username/trendly-ecommerce-visualizer.svg)](https://github.com/your-username/trendly-ecommerce-visualizer/stargazers)
 
-╔══════════════════════════════════════════════════
+╔════════════════════════════════════════════════════════╗ 
 
 
-══════╗  ║             🚀 Welcome to Trendly Dashboard!           ║
+║              🚀 Welcome to Trendly Dashboard!            ║
 
 
-╚══════════════════════════════════════════════════ 
-══════╝
+╚════════════════════════════════════════════════════════╝
 
 # Trendly – E-commerce Sales Trends Visualizer
 
