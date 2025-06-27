@@ -2,11 +2,7 @@
 [![GitHub stars](https://img.shields.io/github/stars/your-username/trendly-ecommerce-visualizer.svg)](https://github.com/your-username/trendly-ecommerce-visualizer/stargazers)
 
 ╔════════════════════════════════════════════════════════╗
-
-
 ║             🚀 Welcome to Trendly Dashboard!           ║
-
-
 ╚════════════════════════════════════════════════════════╝
 
 # Trendly – E-commerce Sales Trends Visualizer
@@ -83,24 +79,79 @@
 
 ## 🗺️ High-Level Design
 
-**System Architecture**
+To give an elegant, neon-themed look to your diagrams, we add inline styling directives in Mermaid:
 
 ```mermaid
+%% Configuration for neon theme
+%% Node styles
+classDef neonNode fill:#0ff,stroke:#0ff,stroke-width:2px,color:#000;
+classDef neonEdge stroke:#0ff,stroke-width:2px;
+
 flowchart TD
-    SQL[(SQL Database)] -->|Import| PBIDM[Power BI Data Model]
-    PBIDM -->|DAX Calculations| DAXLayer
-    DAXLayer -->|Bind Measures| Dashboard[Power BI Dashboard]
-    Dashboard -->|User Interaction| Users
+    class SQL,PBIDM,DAXLayer,Dashboard,Users neonNode
+    SQL[(SQL Database)] -->|Import via Connector| PBIDM[Power BI Data Model]
+    PBIDM -->|Compute DAX Measures| DAXLayer[DAX Calculation Layer]
+    DAXLayer -->|Provide Data| Dashboard[Power BI Dashboard]
+    Dashboard -->|Interact| Users[Business Users]
+    class SQL,PBIDM,DAXLayer,Dashboard,Users neonNode
+    linkStyle default stroke:#0ff,stroke-width:2px;
 ```
 
-**Technology Stack & Data Flow**
+```mermaid
+sequenceDiagram
+    %% Neon styling for sequence diagram
+    %% GitHub currently renders sequence diagrams without direct styling, but we prefix steps for clarity.
+    autonumber
+    participant U as User
+    participant DB as SQL Database
+    participant BI as Power BI
+    participant Srv as Power BI Service
+    U->>BI: Open Dashboard
+    BI->>DB: Query data (DirectQuery or Import)
+    DB-->>BI: Return sales & customer data
+    BI->>BI: Execute DAX calculations
+    BI-->>U: Render visuals & KPIs
+    Srv->>BI: Schedule refresh
+    BI->>DB: Refresh data import
+```
 
-| Layer               | Technology                | Description                                           |
-| ------------------- | ------------------------- | ----------------------------------------------------- |
-| Data Storage        | MS SQL Server             | Source of transactional sales, product, customer data |
-| BI & Visualization  | Power BI Desktop/Service  | Dashboard creation and publishing                     |
-| Data Modeling & DAX | Power BI Data Model, DAX  | Measures, calculated columns                          |
-| Security            | Power BI RLS, Credentials | Role-level security and data access                   |
+```mermaid
+flowchart LR
+    %% Neon-themed data flow overview
+    classDef neon fill:#39ff14,stroke:#39ff14,stroke-width:2px,color:#000;
+    class DB,ETL,DAX,Dash neon
+    subgraph Data Source
+      DB(SQL Server)
+    end
+    subgraph Processing
+      ETL[Power BI Import]
+      DAX[DAX Calculation Layer]
+    end
+    subgraph Presentation
+      Dash[Power BI Dashboard]
+    end
+    DB --> ETL --> DAX --> Dash
+    Dash --> Users
+```
+
+```mermaid
+%% New Deployment Diagram (Neon)
+classDiagram
+    %% Define neon style
+    classDef neon fill:#ff00ff,stroke:#ff00ff,stroke-width:2px,color:#000;
+    class WebApp,PowerBI,SQLServer neon;
+    WebApp <|-- PowerBI : connects to
+    PowerBI <|-- SQLServer : reads from
+    WebApp : HTTPS requests
+    PowerBI : embeds dashboard
+    SQLServer : hosts data
+```
+
+\---------------------|------------------------------|------------------------------------------------------|
+\| Data Storage        | MS SQL Server                | Source of transactional sales, product, customer data |
+\| BI & Visualization  | Power BI Desktop/Service     | Dashboard creation and publishing                    |
+\| Data Modeling & DAX | Power BI Data Model, DAX     | Measures, calculated columns                         |
+\| Security            | Power BI RLS, Credentials    | Role-level security and data access                  |
 
 ---
 
