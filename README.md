@@ -79,72 +79,21 @@
 
 ## 🗺️ High-Level Design
 
-To give an elegant, neon-themed look to your diagrams, we add inline styling directives in Mermaid:
+**System Architecture**
 
 ```mermaid
-%% Configuration for neon theme
-%% Node styles
-classDef neonNode fill:#0ff,stroke:#0ff,stroke-width:2px,color:#000;
-classDef neonEdge stroke:#0ff,stroke-width:2px;
-
 flowchart TD
-    class SQL,PBIDM,DAXLayer,Dashboard,Users neonNode
-    SQL[(SQL Database)] -->|Import via Connector| PBIDM[Power BI Data Model]
-    PBIDM -->|Compute DAX Measures| DAXLayer[DAX Calculation Layer]
-    DAXLayer -->|Provide Data| Dashboard[Power BI Dashboard]
-    Dashboard -->|Interact| Users[Business Users]
-    class SQL,PBIDM,DAXLayer,Dashboard,Users neonNode
-    linkStyle default stroke:#0ff,stroke-width:2px;
+  SQL[(SQL Database)] --> BI[Power BI Data Model]
+  BI --> Dash[Power BI Dashboard]
+  Dash --> U[Users]
 ```
 
-```mermaid
-sequenceDiagram
-    %% Neon styling for sequence diagram
-    %% GitHub currently renders sequence diagrams without direct styling, but we prefix steps for clarity.
-    autonumber
-    participant U as User
-    participant DB as SQL Database
-    participant BI as Power BI
-    participant Srv as Power BI Service
-    U->>BI: Open Dashboard
-    BI->>DB: Query data (DirectQuery or Import)
-    DB-->>BI: Return sales & customer data
-    BI->>BI: Execute DAX calculations
-    BI-->>U: Render visuals & KPIs
-    Srv->>BI: Schedule refresh
-    BI->>DB: Refresh data import
-```
+**Deployment Diagram**
 
 ```mermaid
 flowchart LR
-    %% Neon-themed data flow overview
-    classDef neon fill:#39ff14,stroke:#39ff14,stroke-width:2px,color:#000;
-    class DB,ETL,DAX,Dash neon
-    subgraph Data Source
-      DB(SQL Server)
-    end
-    subgraph Processing
-      ETL[Power BI Import]
-      DAX[DAX Calculation Layer]
-    end
-    subgraph Presentation
-      Dash[Power BI Dashboard]
-    end
-    DB --> ETL --> DAX --> Dash
-    Dash --> Users
-```
-
-```mermaid
-%% New Deployment Diagram (Neon)
-classDiagram
-    %% Define neon style
-    classDef neon fill:#ff00ff,stroke:#ff00ff,stroke-width:2px,color:#000;
-    class WebApp,PowerBI,SQLServer neon;
-    WebApp <|-- PowerBI : connects to
-    PowerBI <|-- SQLServer : reads from
-    WebApp : HTTPS requests
-    PowerBI : embeds dashboard
-    SQLServer : hosts data
+  SQL[(SQL Database)] --> BI[Power BI Service]
+  BI --> Dash[Dashboard UI]
 ```
 
 \---------------------|------------------------------|------------------------------------------------------|
